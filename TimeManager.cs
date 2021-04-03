@@ -6,19 +6,18 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TimeNow
 {
     public class TimeManager
     {
-        private static MainWindow _mainWindow;
+        public static event EventHandler<TimeInfo> OnUpdated;
         private static DispatcherTimer _timer = new DispatcherTimer();
 
-        public static void Initialize(MainWindow main)
+        public static void Initialize()
         {
-            _mainWindow = main;
-
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnUpdate;
 
@@ -27,14 +26,13 @@ namespace TimeNow
 
         public static TimeInfo Update()
         {
-            return new TimeInfo(RegionInfo.CurrentRegion, DateTime.Now);
+            return new TimeInfo(DateTime.Now);
         }
 
         private static void OnUpdate(object sender, EventArgs e)
         {
-            TimeInfo now = Update();
-
-            _mainWindow.xTime.Content = now.Time;
+            TimeInfo info = Update();
+            OnUpdated?.Invoke(null, info);
         }
     }
 }

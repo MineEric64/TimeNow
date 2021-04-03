@@ -5,9 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeNow"
         mc:Ignorable="d"
-        Title="TimeNow" Height="450" Width="800">
-    <Grid Background="Black">
-        <Label x:Name="xTime" Content="AM 09:00:00" HorizontalAlignment="Left" Margin="250,162,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="./#NanumBarunGothic" FontSize="48"/>
+        Title="TimeNow" Height="450" Width="800"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="{x:Null}">
 
-    </Grid>
+    <Border BorderBrush="Gray" BorderThickness="0" Background="White" Margin="5">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Gray" />
+        </Border.Effect>
+
+        <Grid Background="Black" Margin="0">
+            <Grid.LayoutTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="xMainScaleTransform" />
+                </TransformGroup>
+            </Grid.LayoutTransform>
+
+            <Label x:Name="xTime" Content="09:00:00" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="./#NanumBarunGothic" FontSize="48" FontStretch="UltraExpanded"/>
+            <Label x:Name="xAPM" Content="AM" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/TimeNow;component/Fonts/#NanumBarunGothic" FontSize="20" Foreground="White" RenderTransformOrigin="0.618,-0.679" Margin="266,202,482,187" FontStretch="UltraExpanded"/>
+            <Label x:Name="xDate" Content="01/01/2021 Wed." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="/TimeNow;component/Fonts/#NanumBarunGothic Light" FontSize="20" Foreground="White" RenderTransformOrigin="0.618,-0.679" Margin="303,244,315,145" FontStretch="UltraExpanded"/>
+            <Image x:Name="xSpotify" Height="50" VerticalAlignment="Bottom" Width="50" Source="pack://siteoforigin:,,,/Resources/spotify.png" MouseUp="xSpotify_Click" HorizontalAlignment="Right" Margin="0,0,40,40" Cursor="Hand"/>
+
+            <Grid x:Name="xTitleBar" Height="16" VerticalAlignment="Top" PreviewMouseDown="xTitleBar_MouseDown">
+                <Grid.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF595959" Offset="0"/>
+                        <GradientStop Color="#FF5B5B5B" Offset="1"/>
+                    </RadialGradientBrush>
+                </Grid.Background>
+
+                <Image x:Name="xMinimize" HorizontalAlignment="Right" Height="12" Margin="0,2,46,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/minimize.png" Cursor="Hand"/>
+                <Image x:Name="xMaximize" HorizontalAlignment="Right" Height="12" Margin="0,2,29,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/maximize.png" Cursor="Hand"/>
+                <Image x:Name="xClose" HorizontalAlignment="Right" Height="12" Margin="0,2,12,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/close.png" Cursor="Hand"/>
+                <Image HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" VerticalAlignment="Top" Width="16" Source="fast-delivery.ico"/>
+                <Label x:Name="xTimeNowTitle" Content="TimeNow" HorizontalAlignment="Left" Margin="22,-2,0,-14" VerticalAlignment="Top" Height="32" FontFamily="NanumBarunGothic" Foreground="White"/>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
