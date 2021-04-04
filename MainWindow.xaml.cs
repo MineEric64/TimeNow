@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using TimeNow.Time;
+using TimeNow.Settings;
+using TimeNow.Others;
+
 namespace TimeNow
 {
     /// <summary>
@@ -22,10 +26,13 @@ namespace TimeNow
     public partial class MainWindow : Window
     {
         private const string SPOTIFY_PROCESS_NAME = "Spotify";
+        public const string APP_NAME = "TimeNow";
+        private SettingsWindow _settingsWindow = new SettingsWindow();
 
         public MainWindow()
         {
             InitializeComponent();
+            SettingsManager.Load();
 
             this.Loaded += MainWindow_OnLoaded;
 
@@ -68,23 +75,25 @@ namespace TimeNow
 
             foreach (var process in processes)
             {
-                if (process.MainWindowHandle != IntPtr.Zero)
-                {
-                    spotify = process.MainWindowHandle;
-                    break;
-                }
+                if (process.MainWindowHandle == IntPtr.Zero) continue;
+
+                spotify = process.MainWindowHandle;
+                break;
             }
 
             if (spotify != IntPtr.Zero)
             {
                 Win32.SwitchToThisWindow(spotify, true);
             }
+            else
+            {
+                MessageBox.Show(Contents.Can_Not_Find_Spotify, APP_NAME, MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+            }
         }
 
         private void xTitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.DragMove();
-
             if (e.OriginalSource is Image x)
             {
                 switch (x.Name)
@@ -100,7 +109,19 @@ namespace TimeNow
                     case "xClose":
                         xClose_Click(sender, e);
                         break;
+
+                    case "xIcon":
+                        if (e.ChangedButton == MouseButton.Right)
+                        {
+                            xIcon_MouseDown(sender, e);
+                        }
+                        break;
                 }
+            }
+
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
             }
         }
 
@@ -144,6 +165,19 @@ namespace TimeNow
             }
 
             Application.Current.Shutdown();
+        }
+
+        private void xIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Right) {
+                return;
+            }
+
+            if (_settingsWindow == null)
+            {
+                _settingsWindow = new SettingsWindow();
+            }
+            _settingsWindow.Show();
         }
     }
 }

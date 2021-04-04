@@ -1,4 +1,4 @@
-﻿namespace TimeNow
+﻿namespace TimeNow.Time
 {
     public enum APMType
     {

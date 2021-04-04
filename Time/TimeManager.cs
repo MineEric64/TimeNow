@@ -9,7 +9,9 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TimeNow
+using TimeNow.Settings;
+
+namespace TimeNow.Time
 {
     public class TimeManager
     {
@@ -26,7 +28,7 @@ namespace TimeNow
 
         public static TimeInfo Update()
         {
-            return new TimeInfo(DateTime.Now);
+            return new TimeInfo(DateTime.Now, SettingsManager.CurrentCulture);
         }
 
         private static void OnUpdate(object sender, EventArgs e)

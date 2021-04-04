@@ -1,0 +1,17 @@
+﻿<Window x:Class="TimeNow.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeNow"
+        mc:Ignorable="d"
+        Title="Settings" Height="400" Width="400">
+    <Grid>
+        <ComboBox x:Name="xLocalization" HorizontalAlignment="Left" Margin="132,22,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="xLocalization_SelectionChanged">
+            <ComboBoxItem Content="English" Tag="en-us"/>
+            <ComboBoxItem Content="한국어" Tag="ko-kr"/>
+        </ComboBox>
+        <Label Content="Localization: " HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" FontFamily="NanumBarunGothic" FontSize="14"/>
+
+    </Grid>
+</Window>

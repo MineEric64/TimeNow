@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TimeNow
+namespace TimeNow.Time
 {
     public class TimeInfo
     {
@@ -15,13 +15,13 @@ namespace TimeNow
         public string Time { get; }
         public string Date { get; }
 
-        public TimeInfo(DateTime now)
+        public TimeInfo(DateTime now, CultureInfo cultureInfo)
         {
             Now = now;
 
-            APM = now.ToString("tt"); //AM
-            Time = now.ToString("hh:mm:ss"); //09:00:00
-            Date = now.ToLongDateString(); //01/01/21 Wed
+            APM = now.ToString("tt", cultureInfo); //AM
+            Time = now.ToString("h:mm:ss", cultureInfo); //9:00:00
+            Date = now.ToString("D", cultureInfo); //01/01/21 Wed
         }
     }
 }
