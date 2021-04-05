@@ -38,9 +38,19 @@
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExtensionBlocks, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtensionBlocks.1.1.0\lib\net462\ExtensionBlocks.dll</HintPath>
+    </Reference>
+    <Reference Include="GuidMapping, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GuidMapping.1.0.0.1\lib\net462\GuidMapping.dll</HintPath>
+    </Reference>
+    <Reference Include="Lnk, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lnk.1.2.0\lib\net461\Lnk.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -117,6 +127,7 @@
     <Resource Include="Fonts\NanumBarunGothicBold.ttf" />
     <Resource Include="Fonts\NanumBarunGothicLight.ttf" />
     <Resource Include="Fonts\NanumBarunGothicUltraLight.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

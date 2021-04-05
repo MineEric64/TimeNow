@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Lnk;
+
 using TimeNow.Time;
 using TimeNow.Settings;
 using TimeNow.Others;
+
+using Screen = System.Windows.Forms.Screen;
+using Path = System.IO.Path;
 
 namespace TimeNow
 {
@@ -87,9 +93,38 @@ namespace TimeNow
             }
             else
             {
-                MessageBox.Show(Contents.Can_Not_Find_Spotify, APP_NAME, MessageBoxButton.OK,
-                    MessageBoxImage.Exclamation);
+                if (GetSpotifyPath(out var path))
+                {
+                    Process.Start(path);
+                }
+                else
+                {
+                    MessageBox.Show(Contents.Can_Not_Find_Spotify, APP_NAME, MessageBoxButton.OK,
+                        MessageBoxImage.Exclamation);
+                }
             }
+        }
+
+        /// <summary>
+        /// Gets Spotify application executable path.
+        /// </summary>
+        /// <param name="path">Spotify application executable path</param>
+        /// <returns>returns whether getting spotify path successfully.</returns>
+        public static bool GetSpotifyPath(out string path)
+        {
+            string startMenu = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "Programs");
+            var spotify = Directory.GetFiles(startMenu, "Spotify.lnk");
+
+            if (spotify.Length > 0)
+            {
+                LnkFile lnk = Lnk.Lnk.LoadFile(spotify[0]);
+
+                path = lnk.LocalPath;
+                return true;
+            }
+
+            path = string.Empty;
+            return false;
         }
 
         private void xTitleBar_MouseDown(object sender, MouseButtonEventArgs e)
