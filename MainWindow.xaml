@@ -41,6 +41,7 @@
                 <Image x:Name="xIcon" HorizontalAlignment="Left" Height="16" Margin="6,0,0,0" VerticalAlignment="Top" Width="16" Source="Resources/icon.ico" MouseDown="xIcon_MouseDown"/>
                 <Label x:Name="xTimeNowTitle" Content="TimeNow" HorizontalAlignment="Left" Margin="22,-2,0,-14" VerticalAlignment="Top" Height="32" FontFamily="NanumBarunGothic" Foreground="White"/>
             </Grid>
+            <TextBox HorizontalAlignment="Center" Height="80" Margin="605,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="Advice" FontFamily="NanumBarunGothicOTF Light" FontSize="20" IsReadOnly="True" Background="#FF0F0F0F" Foreground="White"/>
         </Grid>
     </Border>
 </Window>
