@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 
 using Lnk;
 
+using TimeNow.Clients;
 using TimeNow.Time;
 using TimeNow.Settings;
 using TimeNow.Others;
@@ -51,6 +52,8 @@ namespace TimeNow
         {
             TimeManager.OnUpdated += OnUpdate;
             TimeManager.Initialize();
+
+            DiscordManager.Initialize();
         }
 
         private void OnUpdate(object sender, TimeInfo info)
