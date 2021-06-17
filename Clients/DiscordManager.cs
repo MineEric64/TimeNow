@@ -13,7 +13,9 @@ namespace TimeNow.Clients
         public const string APPLICATION_ID = "851813873936760892";
 
         public static DiscordRpcClient Client { get; private set; }
+
         public static bool IsRunning { get; private set; }
+        public static bool IsBackgroundRunning { get; set; } = true;
 
         public static bool Initialize()
         {
@@ -45,6 +47,18 @@ namespace TimeNow.Clients
             Client = null;
 
             IsRunning = false;
+        }
+
+        public static async Task ConnectBackground()
+        {
+            while (IsBackgroundRunning)
+            {
+                if (await Task.Run(Initialize))
+                {
+                    break;
+                }
+                await Task.Delay(1000);
+            }
         }
     }
 }

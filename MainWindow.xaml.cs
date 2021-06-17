@@ -53,7 +53,7 @@ namespace TimeNow
             TimeManager.OnUpdated += OnUpdate;
             TimeManager.Initialize();
 
-            DiscordManager.Initialize();
+            Task.Run(DiscordManager.ConnectBackground);
         }
 
         private void OnUpdate(object sender, TimeInfo info)
